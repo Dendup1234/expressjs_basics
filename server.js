@@ -4,9 +4,10 @@ const app = express();
 
 //Middleware
 app.use(logging);
-
+app.use(express.static("public"));
 app.set("view engine", "ejs");
-app.set("views", "./views");
+//Helps to read the objects inside the url
+app.use(express.urlencoded({ extended: true }));
 
 //For the root directory
 app.get("/", (req, res) => {

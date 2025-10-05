@@ -5,8 +5,21 @@ router.get("/", (req, res) => {
   res.send("User list");
 });
 
+router.get("/new", (req, res) => {
+  res.render("users/form", { firstName: "test" });
+});
+
 router.post("/", (req, res) => {
-  res.send("Add a new user");
+  const isValid = true;
+  if (isValid) {
+    users.push({ firstName: req.body.firstName });
+    res.redirect(`users/${users.length - 1}`);
+  } else {
+    console.log("error");
+    res.redirect("users/form");
+  }
+  console.log(req.body.firstName);
+  res.send(`Hi ${req.body.firstName}`);
 });
 
 //router to combine all the methods
